@@ -48,4 +48,4 @@
 
 - Ejecutar `npm install` o `yarn add` para descargar e instalar las dependencias.
 
-- Ejecutar `npm run dev` para iniciar el servidor de desarrollo.
+- Ejecutar `npm run dev` para iniciar el servidor de desarrollo, usualmente en http://localhost:3000/.
