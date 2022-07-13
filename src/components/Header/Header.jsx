@@ -4,7 +4,13 @@ import { Button } from '../Button';
 import './Header.css';
 
 export const Header = (props) => {
-  const { setShowForm, setFormStatus, searchValue, setSearchValue } = props;
+  const {
+    setShowForm,
+    setFormStatus,
+    searchValue,
+    setSearchValue,
+    isEmptyList,
+  } = props;
   const handleShowForm = () => {
     setShowForm(true);
     setFormStatus('new');
@@ -12,11 +18,21 @@ export const Header = (props) => {
   return (
     <section className='header'>
       <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
-      <Button type='new' onClick={handleShowForm}>
+      <Button
+        type='new'
+        onClick={handleShowForm}
+        className={isEmptyList ? 'button-empty-table' : ''}
+      >
         Nuevo
       </Button>
     </section>
   );
 };
 
-Header.propTypes = {};
+Header.propTypes = {
+  setShowForm: PropTypes.func,
+  setFormStatus: PropTypes.func,
+  searchValue: PropTypes.string,
+  setSearchValue: PropTypes.func,
+  isEmptyList: PropTypes.bool,
+};

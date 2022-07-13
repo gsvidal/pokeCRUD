@@ -1,16 +1,20 @@
-import { useState } from 'react';
 import './App.css';
+import { useState } from 'react';
 import { Header } from './components/Header';
 import { PokemonTable } from './components/PokemonTable';
 import { PokemonForm } from './components/PokemonForm';
-import { SuccessToaster } from './components/SuccessToaster';
+import { Toaster } from './components/Toaster';
+import { useSelector } from 'react-redux';
 
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [formStatus, setFormStatus] = useState('');
-  const [editPokemonId, setEditPokemonId] = useState('');
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [editPokemonId, setEditPokemonId] = useState(-1);
   const [searchValue, setSearchValue] = useState('');
+  const [isEmptyList, setIsEmptyList] = useState(false);
+
+  const { hasCreationSucceed, hasUpdateSucceed, hasDeleteSucceed } =
+    useSelector((store) => store.success);
 
   return (
     <div className='App'>
@@ -19,13 +23,15 @@ function App() {
         setFormStatus={setFormStatus}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        isEmptyList={isEmptyList}
       />
       <PokemonTable
         setEditPokemonId={setEditPokemonId}
+        showForm={showForm}
         setShowForm={setShowForm}
         setFormStatus={setFormStatus}
-        setShowSuccess={setShowSuccess}
         searchValue={searchValue}
+        setIsEmptyList={setIsEmptyList}
       />
       {showForm && (
         <PokemonForm
@@ -34,7 +40,9 @@ function App() {
           editPokemonId={editPokemonId}
         />
       )}
-      {showSuccess && <SuccessToaster />}
+      {hasCreationSucceed && <Toaster type='new' />}
+      {hasUpdateSucceed && <Toaster type='update' />}
+      {hasDeleteSucceed && <Toaster type='delete' />}
     </div>
   );
 }

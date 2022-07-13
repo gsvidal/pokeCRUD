@@ -1,16 +1,19 @@
 import { createPokemon } from '../services/post/createPokemon';
 import { useDispatch } from 'react-redux';
 import { setNewPokemon } from '../redux/pokemonSlice';
+import { creationSuccess } from '../redux/successSlice';
+import { afterCreationSuccess } from '../redux/successSlice';
 
 const useCreatePokemon = (pokemon) => {
   const dispatch = useDispatch();
   const setPokemon = async () => {
-    console.log(pokemon);
     try {
       const response = await createPokemon(pokemon);
-      console.log('this is gonna be dispatched', response);
       dispatch(setNewPokemon(response));
-      //dispatch(hasSucced())
+      dispatch(creationSuccess());
+      setTimeout(() => {
+        dispatch(afterCreationSuccess());
+      }, 5000);
     } catch (error) {
       console.error(error);
     }

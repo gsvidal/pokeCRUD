@@ -1,7 +1,8 @@
 .range {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 280px;
   margin-bottom: 35px;
 }
 
@@ -12,4 +13,13 @@
 
 .range__input {
   margin: 0 10px;
+}
+
+.range__middle-value {
+  position: relative;
+  top: -20px;
+  left: 92px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--button-bg-color-primary);
 }

@@ -1,12 +1,25 @@
+.table {
+  margin: 0 auto;
+}
+
 .table,
 .table__header,
 .table__data,
 .table__row {
-  padding: 8px 30px;
+  padding: 3px 10px;
   border: 1px solid var(--color-grey);
   border-collapse: collapse;
   background-color: white;
   text-align: center;
+}
+
+.table__header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.table__data {
+  word-break: break-all;
 }
 
 .table__img {
@@ -16,10 +29,12 @@
 .table__img img {
   margin-top: 2px;
 }
+
 .table__icons {
   border: none;
+  height: 55px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -31,11 +46,20 @@
   cursor: pointer;
 }
 
+.table__action:hover {
+  filter: brightness(0) saturate(100%);
+}
+
 .table__action--delete {
   display: inline-block;
   width: 15px;
   height: 15px;
   background: url('../../assets/icons/delete.svg') center/cover no-repeat;
+}
+
+.table__action--delete:hover {
+  filter: brightness(0) saturate(100%) invert(28%) sepia(77%) saturate(6712%)
+    hue-rotate(353deg) brightness(92%) contrast(131%);
 }
 
 .table__no-data {
@@ -50,4 +74,34 @@
   margin-bottom: 20px;
   background: url('../../assets/images/empty-pokeball.png') center/cover
     no-repeat;
+}
+
+.table__no-data-msg {
+  color: var(--button-bg-color-primary);
+  font-weight: 500;
+}
+
+@media screen and (min-width: 768px) {
+  .table {
+    margin: 0;
+  }
+  .table,
+  .table__header,
+  .table__data,
+  .table__row {
+    padding: 3px 25px;
+  }
+
+  .table__header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .table__data {
+    word-break: normal;
+  }
+
+  .table__icons {
+    justify-content: space-between;
+  }
 }

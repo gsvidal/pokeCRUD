@@ -6,6 +6,9 @@ import { Button } from '../Button';
 import useCreatePokemon from '../../hooks/useCreatePokemon';
 import useUpdatePokemon from '../../hooks/useUpdatePokemon';
 import { useSelector } from 'react-redux';
+import { randomHP } from '../../utils';
+import { randomPokemonType } from '../../utils';
+import PropTypes from 'prop-types';
 
 export const PokemonForm = (props) => {
   const { setShowForm, formStatus, editPokemonId } = props;
@@ -16,21 +19,23 @@ export const PokemonForm = (props) => {
   const pokemonToEdit = pokemons.filter(
     (pokemon) => pokemon.id === editPokemonId
   )[0];
-  // console.log(pokemonToEdit);
-  // console.log(formStatus);
 
   const [values, setValues] = useState({
-    name: formStatus === 'new' ? '' : pokemonToEdit.name,
-    image: formStatus === 'new' ? '' : pokemonToEdit.image,
+    name: formStatus === 'new' ? '' : pokemonToEdit?.name,
+    image: formStatus === 'new' ? '' : pokemonToEdit?.image,
+    attack: formStatus === 'new' ? 50 : pokemonToEdit?.attack,
+    defense: formStatus === 'new' ? 50 : pokemonToEdit?.defense,
+    hp: formStatus === 'new' ? randomHP() : pokemonToEdit?.hp,
+    type: formStatus === 'new' ? randomPokemonType() : pokemonToEdit?.type,
   });
 
   const { setPokemon } = useCreatePokemon({
     name: values.name,
     image: values.image,
-    attack: 43,
-    defense: 33,
-    hp: 54,
-    type: 'plant',
+    attack: values.attack,
+    defense: values.defense,
+    hp: values.hp,
+    type: values.type,
     idAuthor: 24,
   });
 
@@ -38,16 +43,14 @@ export const PokemonForm = (props) => {
     {
       name: values.name,
       image: values.image,
-      attack: 43,
-      defense: 33,
-      hp: 54,
-      type: 'plant',
+      attack: values.attack,
+      defense: values.defense,
+      hp: values.hp,
+      type: values.type,
       idAuthor: 24,
     },
     pokemonToEdit?.id
   );
-
-  console.log(formStatus);
 
   useEffect(() => {
     if (values.name !== '' && values.image !== '') {
@@ -58,12 +61,9 @@ export const PokemonForm = (props) => {
   }, [values.name, values.image]);
 
   const handleSavePokemon = () => {
-    setValues({ name: '', image: '' });
     //Custom hooks for new/editing pokemons
     formStatus === 'new' ? setPokemon() : editPokemon();
     setShowForm(false);
-
-    console.log(values);
   };
 
   const handleCloseForm = () => {
@@ -82,7 +82,9 @@ export const PokemonForm = (props) => {
           <TextInput
             label='Nombre:'
             value={values.name}
-            onChange={(e) => setValues({ ...values, name: e.target.value })}
+            onChange={(e) => {
+              setValues({ ...values, name: e.target.value });
+            }}
             inputProps={{ type: 'text', placeholder: 'Nombre de tu pokemon' }}
           />
           <TextInput
@@ -96,13 +98,17 @@ export const PokemonForm = (props) => {
           <RangeInput
             label='Ataque:'
             value={values.attack}
-            onChange={(e) => setValues({ ...values, attack: e.target.value })}
+            onChange={(e) =>
+              setValues({ ...values, attack: Number(e.target.value) })
+            }
             inputProps={{ type: 'range' }}
           />
           <RangeInput
             label='Defensa:'
             value={values.defense}
-            onChange={(e) => setValues({ ...values, defense: e.target.value })}
+            onChange={(e) =>
+              setValues({ ...values, defense: Number(e.target.value) })
+            }
             inputProps={{ type: 'range' }}
           />
         </div>
@@ -122,4 +128,8 @@ export const PokemonForm = (props) => {
   );
 };
 
-export default PokemonForm;
+PokemonForm.propTypes = {
+  setShowForm: PropTypes.func,
+  formStatus: PropTypes.string,
+  editPokemonId: PropTypes.number,
+};

@@ -8,7 +8,4 @@ describe('when Button is rendered', () => {
     const button = render(<Button />);
     expect(button.container.firstChild.type).toBe('button');
   });
-  // it('should exist the new button', () => {
-  //   const button = render(<Button />);
-  // });
 });

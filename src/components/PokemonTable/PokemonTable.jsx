@@ -4,50 +4,60 @@ import { useSelector } from 'react-redux';
 import useGetPokemon from '../../hooks/useGetPokemon';
 import useDeletePokemon from '../../hooks/useDeletePokemon';
 import './PokemonTable.css';
+import { Loader } from '../Loader';
 
 export const PokemonTable = (props) => {
   const {
+    showForm,
     setShowForm,
     setFormStatus,
     setEditPokemonId,
-    setShowSuccess,
     searchValue,
+    setIsEmptyList,
   } = props;
-  const { fetchPokemonList } = useGetPokemon();
-  const pokemons = useSelector((store) => store.pokemons);
-  const { isLoading } = useSelector((store) => store.loader);
-  console.log(isLoading);
+
   const [pokemonIdToDelete, setPokemonIdToDelete] = useState('');
 
+  const pokemons = useSelector((store) => store.pokemons);
+  const { isLoading } = useSelector((store) => store.loader);
+
+  const { fetchPokemonList } = useGetPokemon();
   const { removePokemon } = useDeletePokemon(pokemonIdToDelete);
 
   useEffect(() => {
     fetchPokemonList();
   }, []);
 
+  useEffect(() => {
+    if (pokemons.length === 0) {
+      setIsEmptyList(true);
+    } else {
+      setIsEmptyList(false);
+    }
+  }, [pokemons]);
+
   const handleEditPokemon = (id) => {
-    setShowForm(true);
-    setFormStatus('edit');
-    setEditPokemonId(id);
+    if (showForm) {
+      setShowForm(false);
+    } else {
+      setShowForm(true);
+      setFormStatus('edit');
+      setEditPokemonId(id);
+    }
   };
 
-  pokemonIdToDelete !== '' && removePokemon();
-
-  console.log('lista de pokemon para la tabla:', pokemons);
+  useEffect(() => {
+    if (pokemonIdToDelete) {
+      removePokemon();
+    }
+  }, [pokemonIdToDelete]);
 
   const pokemonsFiltered = pokemons.filter((pokemon) =>
-    pokemon.name.includes(searchValue.toLocaleLowerCase())
+    pokemon.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
   );
 
-  // useEffect(() => {
-  //   setShowSuccess(true);
-  //   setTimeout(() => {
-  //     setShowSuccess(false);
-  //   }, 5000);
-  // }, [pokemons]);
-
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   } else {
     return (
       <table className='table'>
@@ -71,7 +81,26 @@ export const PokemonTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {pokemons.length !== 0 ? (
+          {pokemons.length === 0 || pokemonsFiltered.length === 0 ? (
+            <tr className='table__row' data-testid='row-empty-list'>
+              <td className='table__no-data' colSpan='5'>
+                <span className='table__no-data-icon'></span>
+                {pokemons.length === 0 && (
+                  <p>
+                    Aún no tienes ningún pokemon, <strong>atrápalos ya!</strong>
+                  </p>
+                )}
+                {pokemons.length !== 0 && pokemonsFiltered.length === 0 && (
+                  <p>
+                    No tienes ningún pokemon que coincida con tu{' '}
+                    <span className='table__no-data-msg'>
+                      criterio de busqueda
+                    </span>
+                  </p>
+                )}
+              </td>
+            </tr>
+          ) : (
             pokemonsFiltered.map((pokemon) => (
               <tr
                 className='table__row'
@@ -80,7 +109,11 @@ export const PokemonTable = (props) => {
               >
                 <td className='table__data'>{pokemon.name}</td>
                 <td className='table__data table__img'>
-                  <img src={pokemon.image} alt='Ivisaur"s pic' width='30' />
+                  <img
+                    src={pokemon.image}
+                    alt={`${pokemon.name}'s pic`}
+                    width='43'
+                  />
                 </td>
                 <td className='table__data'>{pokemon.attack}</td>
                 <td className='table__data'>{pokemon.defense}</td>
@@ -96,13 +129,6 @@ export const PokemonTable = (props) => {
                 </td>
               </tr>
             ))
-          ) : (
-            <tr className='table__row' data-testid='row-empty-list'>
-              <td className='table__no-data' colSpan='5'>
-                <span className='table__no-data-icon'></span>
-                <p>Aún no tienes ningún pokemon, atrápalos ya!</p>
-              </td>
-            </tr>
           )}
         </tbody>
       </table>
@@ -110,4 +136,11 @@ export const PokemonTable = (props) => {
   }
 };
 
-PokemonTable.propTypes = {};
+PokemonTable.propTypes = {
+  showForm: PropTypes.bool,
+  setShowForm: PropTypes.func,
+  setFormStatus: PropTypes.func,
+  setEditPokemonId: PropTypes.func,
+  searchValue: PropTypes.string,
+  setIsEmptyList: PropTypes.func,
+};

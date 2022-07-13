@@ -1,6 +1,7 @@
 .pokemon-form {
+  max-width: 800px;
   padding: 30px;
-  margin-top: 20px;
+  margin: 20px 0;
   background-color: white;
   border: 1px solid var(--color-grey);
 }

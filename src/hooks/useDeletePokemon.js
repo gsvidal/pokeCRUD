@@ -1,15 +1,19 @@
 import { deletePokemon } from '../services/delete/deletePokemon';
 import { useDispatch } from 'react-redux';
 import { setDeletePokemon } from '../redux/pokemonSlice';
+import { deleteSuccess } from '../redux/successSlice';
+import { afterDeleteSuccess } from '../redux/successSlice';
 
 const useDeletePokemon = (id) => {
   const dispatch = useDispatch();
   const removePokemon = async () => {
-    console.log('its id', id);
     try {
       const responseId = await deletePokemon(id);
-      console.log('this is gonna be dispatched after deleted', responseId);
       dispatch(setDeletePokemon({ id: responseId }));
+      dispatch(deleteSuccess());
+      setTimeout(() => {
+        dispatch(afterDeleteSuccess());
+      }, 5000);
     } catch (error) {
       console.error(error);
     }

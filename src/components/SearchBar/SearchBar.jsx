@@ -5,8 +5,8 @@ export const SearchBar = (props) => {
   const { searchValue, setSearchValue } = props;
 
   const handleSearchValue = (value) => {
-    setSearchValue(value)
-  }
+    setSearchValue(value);
+  };
 
   return (
     <section className='searchbar'>
@@ -19,11 +19,14 @@ export const SearchBar = (props) => {
         type='text'
         placeholder='Buscar'
         className='searchbar__input'
-        onChange={(e)=> handleSearchValue(e.target.value)}
+        onChange={(e) => handleSearchValue(e.target.value)}
         value={searchValue}
       />
     </section>
   );
 };
 
-SearchBar.propTypes = {};
+SearchBar.propTypes = {
+  searchValue: PropTypes.string,
+  setSearchValue: PropTypes.func,
+};

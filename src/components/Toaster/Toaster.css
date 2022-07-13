@@ -1,0 +1,35 @@
+.toaster {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 500px;
+  padding: 20px;
+  margin-top: 50px;
+  color: var(--success-creation-color);
+  font-weight: 500;
+  background-color: var(--success-creation-bg-color);
+  border: 1px solid var(--success-creation-color);
+  border-radius: 4px;
+  animation: toaster 5s 1 forwards;
+}
+
+.toaster--update {
+  color: var(--success-update-color);
+  background-color: var(--success-update-bg-color);
+  border-color: var(--success-update-color);
+}
+
+.toaster--delete {
+  color: var(--success-delete-color);
+  background-color: var(--success-delete-bg-color);
+  border-color: var(--success-delete-color);
+}
+
+@keyframes toaster {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0%;
+  }
+}

@@ -1,6 +1,8 @@
 import './TextInput.css';
+import PropTypes from 'prop-types';
 
-export const TextInput = ({ label, inputProps, onChange, value }) => {
+export const TextInput = (props) => {
+  const { label, inputProps, onChange, value } = props;
   return (
     <div className='text'>
       <label className='text__label' htmlFor={label}>
@@ -15,4 +17,11 @@ export const TextInput = ({ label, inputProps, onChange, value }) => {
       />
     </div>
   );
+};
+
+TextInput.propTypes = {
+  label: PropTypes.string,
+  inputProps: PropTypes.object,
+  onChange: PropTypes.func,
+  value: PropTypes.string,
 };

@@ -11,6 +11,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #eeeeee;
+  background: url('./assets/images/pokeball-bg.png') repeat;
+  background-size: 400px 400px;
+  background-color: #eee;
 
   /* Theming */
   --button-bg-color-primary: #6758f7;
@@ -18,9 +21,12 @@ body {
   --button-bg-color-clicked: #6758a4;
   --button-bg-color-disabled: #d0cbfc;
   --color-grey: #9dadba;
-  --error-color: #ffbbc1;
-  --success-bg-color: #d4edda;
-  --success-color: #16a238;
+  --success-creation-bg-color: #d4edda;
+  --success-creation-color: #16a238;
+  --success-update-bg-color: #cccdff;
+  --success-update-color: #6567e3;
+  --success-delete-bg-color: #fff3cd;
+  --success-delete-color: #ffa900;
 }
 
 code {

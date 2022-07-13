@@ -26,6 +26,22 @@
   cursor: not-allowed;
 }
 
+.button.button-empty-table {
+  animation: buttonEmptyTable 1s infinite;
+}
+
+@keyframes buttonEmptyTable {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .button__icon {
   display: inline-block;
   width: 20px;
@@ -40,4 +56,10 @@
 
 .button__icon--cancel {
   background-image: url('../../assets/icons/button_cancel.svg');
+}
+
+@media screen and (min-width: 768px) {
+  .button {
+    margin-right: 0px;
+  }
 }

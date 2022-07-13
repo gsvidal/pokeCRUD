@@ -11,16 +11,17 @@ const pokemonSlice = createSlice({
       state.push(action.payload);
     },
     setEditedPokemon: (state, action) => {
-      const { id, name, image } = action.payload;
+      const { id, name, image, attack, defense } = action.payload;
       const pokemonToEdit = state.find((pokemon) => pokemon.id === id);
       if (pokemonToEdit) {
         pokemonToEdit.name = name;
         pokemonToEdit.image = image;
+        pokemonToEdit.attack = attack;
+        pokemonToEdit.defense = defense;
       }
     },
     setDeletePokemon: (state, action) => {
       const { id } = action.payload;
-      console.log(state);
       const pokemonToDelete = state.find((pokemon) => pokemon.id === id);
       if (pokemonToDelete) {
         return state.filter((pokemon) => pokemon.id !== id);
