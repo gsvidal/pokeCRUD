@@ -4,6 +4,7 @@
   left: 0;
   width: 500px;
   padding: 20px;
+  margin: 0 auto;
   margin-top: 50px;
   color: var(--success-creation-color);
   font-weight: 500;
@@ -31,5 +32,12 @@
   }
   to {
     opacity: 0%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .toaster {
+    margin: 0;
+    margin-top: 50px;
   }
 }
