@@ -32,7 +32,7 @@
 
 ## Code Plus Features:
 
-- Vite ( Es mucho más rápido que create-react-app para desarrollar ).
+- Vite ( Es mucho más rápido que create-react-app sobre todo a la hora de desarrollar ).
 
 - Documentacion con PropTypes.
 
