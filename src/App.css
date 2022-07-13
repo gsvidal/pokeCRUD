@@ -1,3 +1,11 @@
 .App {
+  padding: 20px;
   text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .App {
+    padding: 50px;
+    text-align: left;
+  }
 }

@@ -1,0 +1,15 @@
+.range {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.range__label {
+  display: inline-block;
+  width: 80px;
+}
+
+.range__input {
+  margin: 0 10px;
+}

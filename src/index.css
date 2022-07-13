@@ -10,7 +10,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eee;
+  background-color: #eeeeee;
+
+  /* Theming */
+  --button-bg-color-primary: #6758f7;
+  --button-bg-color-hover: #6758cc;
+  --button-bg-color-clicked: #6758a4;
+  --button-bg-color-disabled: #d0cbfc;
+  --color-grey: #9dadba;
+  --error-color: #ffbbc1;
+  --success-bg-color: #d4edda;
+  --success-color: #16a238;
 }
 
 code {
