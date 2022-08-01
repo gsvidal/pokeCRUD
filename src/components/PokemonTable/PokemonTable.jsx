@@ -24,6 +24,19 @@ export const PokemonTable = (props) => {
   const { fetchPokemonList } = useGetPokemon();
   const { removePokemon } = useDeletePokemon(pokemonIdToDelete);
 
+  const [showImage, setShowImage] = useState(false);
+  const [pokemonIndexImage, setPokemonIndexImage] = useState(-1)
+
+  const handleShowImage = (index) => {
+    setPokemonIndexImage(index);
+    setShowImage(showImage => !showImage);
+  }
+
+  // useEffect(() => {
+  //   console.log(pokemonIndexImage);
+    
+  // }, [pokemonIndexImage])
+
   useEffect(() => {
     fetchPokemonList();
   }, []);
@@ -101,7 +114,7 @@ export const PokemonTable = (props) => {
               </td>
             </tr>
           ) : (
-            pokemonsFiltered.map((pokemon) => (
+            pokemonsFiltered.map((pokemon,i, arr) => (
               <tr
                 className='table__row'
                 data-testid='row-list'
@@ -113,7 +126,17 @@ export const PokemonTable = (props) => {
                     src={pokemon.image}
                     alt={`${pokemon.name}'s pic`}
                     width='43'
+                    onClick={() =>  handleShowImage(i)}
                   />
+                  {showImage &&
+                    <section className='table__modal'>
+                      <figure className='table__modal-img-container'>
+                       <figcaption>{arr[pokemonIndexImage].name}</figcaption> 
+                        <img className='table__modal-img' src={arr[pokemonIndexImage].image} alt={`${arr[pokemonIndexImage].name}'s pic`} width="100" height="100" />
+                        <span className='table__modal-icon' onClick={() => handleShowImage(pokemonIndexImage)}></span>
+                      </figure>
+                    </section>
+                  }
                 </td>
                 <td className='table__data'>{pokemon.attack}</td>
                 <td className='table__data'>{pokemon.defense}</td>

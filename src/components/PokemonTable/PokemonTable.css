@@ -28,6 +28,7 @@
 
 .table__img img {
   margin-top: 2px;
+  cursor: pointer;
 }
 
 .table__icons {
@@ -79,6 +80,38 @@
 .table__no-data-msg {
   color: var(--button-bg-color-primary);
   font-weight: 500;
+}
+
+.table__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.table__modal-img-container {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  padding: 30px;
+  top: calc(50vh - 100px);
+  left: calc(50vw - 100px);
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.table__modal-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url("../../assets/icons/button_cancel.svg") center/cover no-repeat;
+  filter: brightness(0%)
 }
 
 @media screen and (min-width: 768px) {
