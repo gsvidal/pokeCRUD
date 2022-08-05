@@ -8,7 +8,7 @@ export const Button = (props) => {
     <button
       onClick={onClick}
       type='button'
-      className={`button button--${disabled && 'disabled'} ${className}`}
+      className={`button ${disabled ? ' button--disabled' : ''} ${className}`}
       disabled={disabled}
     >
       <span className={`button__icon button__icon--${type}`}></span>
@@ -19,6 +19,7 @@ export const Button = (props) => {
 
 Button.defaultProps = {
   type: 'header',
+  disabled: false
 };
 
 Button.propTypes = {
