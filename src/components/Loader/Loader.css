@@ -1,4 +1,7 @@
 .loader {
+  position: relative;
+  top: 0;
+  left: 0;
   display: inline-block;
   width: 400px;
   height: 400px;
@@ -6,6 +9,17 @@
     no-repeat;
   opacity: 0.5;
   animation: spin 0.5s infinite;
+}
+
+@media screen and (min-width: 768px) {
+  .loader {
+    left: 20%;
+  }
+}
+@media screen and (min-width: 900px) {
+  .loader {
+    left: 25%;
+  }
 }
 
 @keyframes spin {
