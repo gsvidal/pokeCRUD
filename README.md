@@ -1,5 +1,9 @@
 # pokemon-app-gonzalo-vidal
 
+<a href="https://www.gonzalovidal.dev/pokeCRUD/">
+  <img src="https://i.postimg.cc/JhJ6YmWd/crud-pokemon.gif">
+</a> 
+
 ## Tech Stack:
 
 <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" alt="html5 Logo" width="50" height="50"/> <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-original.svg" alt="css3 Logo" width="50" height="50"/>
