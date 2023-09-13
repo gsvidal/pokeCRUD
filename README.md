@@ -1,4 +1,4 @@
-# pokemon-app-gonzalo-vidal 
+# Pokemon CRUD App
 ### Update: The 3rd party API at 'https://bp-pokemons.herokuapp.com' is currently unavailable
 
 <a href="https://www.gonzalovidal.dev/pokeCRUD/">
